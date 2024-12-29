@@ -1,2 +1,6 @@
-pencv-contrib-python-headless
 streamlit
+opencv-contrib-python
+numpy
+matplotlib
+scikit-image
+scipy
