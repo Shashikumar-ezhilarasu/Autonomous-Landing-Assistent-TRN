@@ -397,7 +397,7 @@ def chatbot_component():
 # Streamlit main (with Independent Components)
 ###################
 def main():
-    st.title("AI4Mars Unified Analysis")
+    st.title("AI4Mars Unified Analysis For Autonomous Landing")
 
     # Sidebar for navigation
     st.sidebar.title("Navigation")
