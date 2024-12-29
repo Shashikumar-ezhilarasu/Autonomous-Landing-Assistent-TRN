@@ -1,0 +1,2 @@
+pencv-contrib-python-headless
+streamlit
