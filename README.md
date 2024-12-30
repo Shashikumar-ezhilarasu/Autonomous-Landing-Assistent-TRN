@@ -1,5 +1,7 @@
 
 # Terrain Relative Navigation (TRN) - An Spacecraft assistent 
+![image](https://github.com/user-attachments/assets/c635b90d-5781-4913-83f9-b3b748da6005)
+![image](https://github.com/user-attachments/assets/4a42649b-2c0c-4c08-9e5e-6bed5d9d88e8)
 
 This repository implements a comprehensive suite of image processing tools for Terrain Relative Navigation (TRN) systems. These features can be utilized for pre-processing, feature extraction, noise handling, and segmentation in applications such as autonomous navigation, remote sensing, and terrain analysis.
 #PROBLEM STATEMENT
