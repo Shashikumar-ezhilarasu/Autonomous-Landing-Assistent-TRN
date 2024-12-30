@@ -2,7 +2,13 @@
 # Terrain Relative Navigation (TRN) - An Spacecraft assistent 
 
 This repository implements a comprehensive suite of image processing tools for Terrain Relative Navigation (TRN) systems. These features can be utilized for pre-processing, feature extraction, noise handling, and segmentation in applications such as autonomous navigation, remote sensing, and terrain analysis.
+#PROBLEM STATEMENT
 
+ Develop a TRN system using image data, Lidar, and IMU to ensure precise and safe autonomous landings.Unique Feature: Combines real-time terrain mapping with machine learning for autonomous decision-making.Main Problem Addressed: Reduces mission failure risk by accurately identifying and landing in safe zones on
+diverse planetary surfaces.
+
+# PROPOSED SOLUTION
+Develop an AI/ML-driven Terrain Relative Navigation(TRN) system that leverages image data, Lidar, and IMU to enable precise and autonomous spacecraft landings.The solution should ensure real-time terrain mapping and safe zone identification, reducing mission failure risks on diverse planetary surfaces
 ## Features
 
 ### Edge Detection and Feature Extraction
