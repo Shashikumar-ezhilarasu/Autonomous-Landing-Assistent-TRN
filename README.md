@@ -1,70 +1,148 @@
 pip install streamlit opencv-contrib-python numpy matplotlib scikit-image scipy
 
 
-Image Processing with Feature and Landing Safety Analysis
-This project is a Streamlit-based web application that performs various image processing techniques for feature extraction and landing safety assessment. The app allows users to upload an image, which is then processed to compute key features (like SIFT, HOG, Gabor filters, and others) and evaluate the surface slope and roughness for assessing landing safety.
+# Terrain Relative Navigation (TRN) Image Processing Toolbox
 
-Features
-Feature Analysis
-Keypoint Detection and Feature Extraction: Using techniques such as SIFT, HOG, Gabor filters, Sobel, Prewitt, and more.
-Image Filtering: Apply various filters such as Gaussian blur, median filtering, and edge detection (e.g., Canny, Sobel).
-Morphological Operations: Operations like dilation, erosion, opening, closing, and watershed segmentation to analyze image structure.
-Noise and Thresholding: Add noise, apply adaptive thresholding, and apply Otsu’s method for binarization.
-Blob Detection: Using LoG for blob detection and connected components for region detection.
-Fourier Transform: Apply FFT for frequency-domain analysis.
-Landing Safety Analysis
-Surface Slope Calculation: Using Sobel operator to determine the gradient and assess slope.
-Surface Roughness Calculation: Using Laplacian operator to measure surface roughness.
-Safety Assessment: Based on predefined thresholds, classify the landing surface as "safe" or "unsafe."
-Installation
-Prerequisites
-To run the application, you need Python 3.6 or higher. Install the required libraries using the following:
+This repository implements a comprehensive suite of image processing tools for Terrain Relative Navigation (TRN) systems. These features can be utilized for pre-processing, feature extraction, noise handling, and segmentation in applications such as autonomous navigation, remote sensing, and terrain analysis.
 
-bash
-Copy code
-pip install streamlit opencv-python scikit-image matplotlib pillow scipy
-Running the Application
-To run the app, save the Python script (e.g., app.py) and use the following command in the terminal:
+## Features
 
-bash
-Copy code
-streamlit run app.py
-Once the app starts, it will be available at http://localhost:8501 in your browser.
+### Edge Detection and Feature Extraction
+1. Canny Edge Detection  
+2. Sobel Filter  
+3. Prewitt Filter  
+4. Scharr Filter  
+5. Laplacian of Gaussian (LoG)  
+6. Harris Corner Detection  
 
-Usage
-Upload Image
-Feature Analysis: After uploading an image, the app will automatically process and display various feature extractions and filters applied to the image.
-Landing Safety Analysis: The app will calculate the surface slope and roughness, and evaluate whether the landing area is "safe" or "unsafe" based on the predefined thresholds.
-Available Image Processing Features:
-SIFT: Detects keypoints and descriptors in the image.
-HOG: Computes Histogram of Oriented Gradients for object detection.
-Gabor Filter: Applies a Gabor filter for texture analysis.
-Gaussian Laplace: Used for edge detection.
-Sobel, Prewitt, Roberts: Apply edge detection filters.
-Canny Edge Detection: Detects edges in the image.
-Morphological Operations: Apply dilation, erosion, opening, and closing operations.
-Surface Analysis: Calculate the surface slope and roughness for landing safety evaluation.
-Fourier Transform: Applies the Fourier transform to the image for frequency-domain analysis.
-Landing Safety Evaluation:
-The app will display if the landing area is "safe" or "unsafe" based on slope and roughness calculations.
-Example
-Once you upload an image, you will see processed results with the following outputs:
+### Morphological Operations
+7. Dilation  
+8. Erosion  
+9. Opening  
+10. Closing  
 
-Feature Extractions: Keypoints, filtered images, and edge detection results.
-Surface Analysis: Slope and roughness calculations with a classification for landing safety.
-Code Explanation
-process_all_features(img):
-This function processes an input image using various feature extraction techniques, returning a list of processed results.
+### Noise Reduction
+11. Bilateral Filter Denoising  
+12. Median Filtering (Scipy)  
 
-feature_analysis_component(img):
-This function displays the results of the feature extraction process on the Streamlit app in a grid layout.
+### Histogram and Contrast Adjustments
+13. Histogram Equalization  
+14. CLAHE (Contrast Limited Adaptive Histogram Equalization)  
 
-calculate_surface_slope(image) and calculate_surface_roughness(image):
-These functions calculate the slope and roughness of the image, essential for determining landing safety.
+### Segmentation and Clustering
+15. K-means Segmentation  
+16. Watershed Segmentation  
 
-assess_landing_safety(image):
-Based on the slope and roughness values, this function classifies the landing area as either "safe" or "unsafe."
+### Transformations
+17. Fourier Transform for Frequency Analysis  
+18. Gaussian Smoothing  
 
-Contributing
-Feel free to fork this repository, contribute improvements or report any issues.
+### Skeletonization and Structure Analysis
+19. Skeletonization  
+20. Gaussian Laplace for Blob Detection  
+
+### Keypoint Detection
+21. Corner Detection with Harris  
+22. Segmentation Markers  
+
+### Filters for Terrain Analysis
+23. Thresholding (e.g., Otsu's)  
+24. Edge and Ridge Detection (e.g., Sobel/Scharr)  
+
+### Image Noise Augmentation (Synthetic Testing)
+25. Gaussian Noise Addition  
+
+### Topography-Specific Features
+26. Gradient-Based Feature Detection (Prewitt/Sobel)  
+27. Multi-resolution Analysis (Wavelets or Fourier)  
+
+### Spatial Transformations
+28. Grayscale Conversion (for pre-processing)  
+29. Histogram-based Texture Analysis  
+
+### Shape and Contour Features
+30. Contour Detection  
+31. Watershed for Surface Segmentation  
+
+### Image Analysis
+32. Intensity-Based Thresholding  
+33. Adaptive Thresholding  
+
+### Data Augmentation
+34. Random Noise Addition for Robustness  
+
+### Structural Features
+35. Texture Segmentation  
+36. Blurring for Focused Edge Detection  
+
+### Color Space Analysis
+37. Conversion to Grayscale  
+38. RGB Analysis for Terrain Classification  
+
+### Cluster Analysis
+39. Pixel Clustering using K-means  
+40. Feature Clustering for TRN Models  
+
+## Installation
+
+1. Clone this repository:
+   bash
+   git clone https://github.com/your-username/TRN-Image-Processing-Toolbox.git
+   
+2. Navigate to the repository directory:
+   bash
+   cd TRN-Image-Processing-Toolbox
+   
+3. Install required dependencies:
+   bash
+   pip install -r requirements.txt
+   
+
+## Usage
+
+Import the desired modules and functions in your Python scripts. Example usage:
+
+python
+from trn_toolbox import edge_detection
+
+# Apply Canny Edge Detection
+edges = edge_detection.canny(input_image)
+
+
+For more examples and usage instructions, check the examples/ folder.
+
+## Applications
+
+This toolbox is particularly suited for:
+- Autonomous vehicle navigation
+- Mars rover and planetary exploration systems
+- Satellite image processing
+- Environmental monitoring and terrain mapping
+
+## Contributing
+
+Contributions are welcome! To contribute:
+1. Fork the repository.
+2. Create a new branch:
+   bash
+   git checkout -b feature/your-feature-name
+   
+3. Commit your changes:
+   bash
+   git commit -m "Add your message here"
+   
+4. Push the branch:
+   bash
+   git push origin feature/your-feature-name
+   
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Acknowledgments
+
+- Developed with support from the open-source Python image processing ecosystem.
+- Special thanks to contributors and maintainers of libraries like OpenCV, SciPy, and scikit-image.
 
