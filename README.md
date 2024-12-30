@@ -1,5 +1,3 @@
-pip install streamlit opencv-contrib-python numpy matplotlib scikit-image scipy
-
 
 # Terrain Relative Navigation (TRN) Image Processing Toolbox
 
@@ -108,6 +106,7 @@ from trn_toolbox import edge_detection
 # Apply Canny Edge Detection
 edges = edge_detection.canny(input_image)
 
+pip install streamlit opencv-contrib-python numpy matplotlib scikit-image scipy
 
 For more examples and usage instructions, check the examples/ folder.
 
