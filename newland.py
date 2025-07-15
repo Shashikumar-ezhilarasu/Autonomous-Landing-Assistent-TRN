@@ -117,7 +117,7 @@ def main():
     image_subfolder = st.text_input("Enter the relative path to the image subfolder:", value="msl/images/edr")
     
     # User input for number of images to process (max 100)
-    num_images = st.number_input("Enter the number of images to process (max 100):", min_value=1, max_value=500, value=450)
+    num_images = st.number_input("Enter the number of images to process:", min_value=1, max_value=500, value=450)
 
     # Load and display images
     if st.button("Run Safety Assessment"):
