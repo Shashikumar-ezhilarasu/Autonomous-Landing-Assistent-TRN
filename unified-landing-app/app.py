@@ -1,23 +1,101 @@
 import streamlit as st
-import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from skimage.feature import hog
-from skimage.filters import gabor, sobel, prewitt, roberts, laplace
-from skimage import exposure, measure, feature, filters
-from skimage.restoration import denoise_bilateral
-from skimage.segmentation import watershed
-from skimage.color import label2rgb
-from skimage.morphology import erosion, dilation, opening, closing
-from scipy import ndimage as ndi
-from scipy.ndimage import distance_transform_edt, gaussian_filter
 import time
 import os
 from dotenv import load_dotenv
+
+# Try to import OpenCV with error handling
+try:
+    import cv2
+    CV2_AVAILABLE = True
+except ImportError as e:
+    st.error(f"OpenCV import failed: {e}")
+    st.info("Some advanced image processing features may be limited.")
+    CV2_AVAILABLE = False
+    # Create a mock cv2 module for basic functionality
+    class MockCV2:
+        @staticmethod
+        def imread(path):
+            from PIL import Image
+            import numpy as np
+            img = Image.open(path)
+            return np.array(img)
+        
+        @staticmethod
+        def cvtColor(img, flag):
+            if len(img.shape) == 3:
+                # Convert RGB to grayscale using standard weights
+                return np.dot(img[...,:3], [0.2989, 0.5870, 0.1140])
+            return img
+            
+        COLOR_BGR2GRAY = 6
+        COLOR_RGB2GRAY = 7
+    
+    cv2 = MockCV2()
+
+# Try to import scikit-image components with error handling
+try:
+    from skimage.feature import hog
+    from skimage.filters import gabor, sobel, prewitt, roberts, laplace
+    from skimage import exposure, measure, feature, filters
+    from skimage.restoration import denoise_bilateral
+    from skimage.segmentation import watershed
+    from skimage.color import label2rgb
+    from skimage.morphology import erosion, dilation, opening, closing
+    SKIMAGE_AVAILABLE = True
+except ImportError as e:
+    st.warning(f"Some scikit-image features unavailable: {e}")
+    SKIMAGE_AVAILABLE = False
+
+# Try to import scipy components
+try:
+    from scipy import ndimage as ndi
+    from scipy.ndimage import distance_transform_edt, gaussian_filter
+    SCIPY_AVAILABLE = True
+except ImportError as e:
+    st.warning(f"Some scipy features unavailable: {e}")
+    SCIPY_AVAILABLE = False
+
+# Helper functions for OpenCV operations with fallbacks
+def safe_cv2_operation(func_name, *args, **kwargs):
+    """Safely execute CV2 operations with fallbacks"""
+    if not CV2_AVAILABLE:
+        if func_name == 'cvtColor':
+            img, flag = args
+            if len(img.shape) == 3:
+                return np.dot(img[...,:3], [0.2989, 0.5870, 0.1140])
+            return img
+        elif func_name == 'Sobel':
+            from scipy import ndimage
+            img = args[0]
+            if len(args) > 3:  # x-direction
+                return ndimage.sobel(img, axis=1)
+            else:  # y-direction  
+                return ndimage.sobel(img, axis=0)
+        elif func_name == 'Laplacian':
+            from scipy import ndimage
+            return ndimage.laplace(args[0])
+        elif func_name == 'Canny':
+            from skimage import feature
+            return feature.canny(args[0], low_threshold=args[1]/255, high_threshold=args[2]/255)
+        else:
+            return np.zeros_like(args[0]) if args else None
+    else:
+        return getattr(cv2, func_name)(*args, **kwargs)
+
+def convert_to_grayscale(image):
+    """Convert image to grayscale using available methods"""
+    if len(image.shape) == 3:
+        if CV2_AVAILABLE:
+            return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        else:
+            return np.dot(image[...,:3], [0.2989, 0.5870, 0.1140])
+    return image
 
 # Load environment variables
 load_dotenv()
@@ -114,21 +192,49 @@ st.markdown("""
 @st.cache_data
 def calculate_surface_slope(image):
     """Calculate surface slope using Sobel operators"""
-    grad_x = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=3)
-    grad_y = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=3)
+    if CV2_AVAILABLE:
+        grad_x = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=3)
+        grad_y = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=3)
+    else:
+        # Fallback using scipy
+        from scipy import ndimage
+        grad_x = ndimage.sobel(image, axis=1)
+        grad_y = ndimage.sobel(image, axis=0)
+    
     slope = np.sqrt(grad_x**2 + grad_y**2)
     return np.mean(slope)
 
 @st.cache_data
 def calculate_surface_roughness(image):
-    """Calculate surface roughness using Laplacian operator"""
-    laplacian = cv2.Laplacian(image, cv2.CV_64F)
+    """Calculate surface roughness using Laplacian"""
+    if CV2_AVAILABLE:
+        laplacian = cv2.Laplacian(image, cv2.CV_64F)
+    else:
+        # Fallback using scipy
+        from scipy import ndimage
+        laplacian = ndimage.laplace(image)
+    
     return np.var(laplacian)
 
 @st.cache_data
 def calculate_edge_density(image):
-    """Calculate edge density for terrain complexity assessment"""
-    edges = cv2.Canny(image, 100, 200)
+    """Calculate edge density using Canny edge detection"""
+    if CV2_AVAILABLE:
+        edges = cv2.Canny(image, 100, 200)
+    else:
+        # Fallback using skimage
+        if SKIMAGE_AVAILABLE:
+            from skimage import feature
+            edges = feature.canny(image, low_threshold=0.1, high_threshold=0.2)
+            edges = (edges * 255).astype(np.uint8)
+        else:
+            # Simple gradient-based edge detection
+            from scipy import ndimage
+            grad_x = ndimage.sobel(image, axis=1)
+            grad_y = ndimage.sobel(image, axis=0)
+            edges = np.sqrt(grad_x**2 + grad_y**2)
+            edges = (edges > np.mean(edges) + np.std(edges)).astype(np.uint8) * 255
+    
     return np.sum(edges > 0) / edges.size
 
 @st.cache_data
