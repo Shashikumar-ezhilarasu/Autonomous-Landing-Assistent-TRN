@@ -2,23 +2,23 @@ Autonomous Landing Site Assessment with AI Assistant
 
 A comprehensive Streamlit application for analyzing Mars terrain images to assess landing safety for autonomous spacecraft, now enhanced with Google Gemini AI integration.
 
-## 🌟 Features
+##  Features
 
-### 🛡️ Safety Analysis
+###  Safety Analysis
 
 - **Surface Slope Analysis**: Uses Sobel operators to calculate terrain gradients
 - **Surface Roughness**: Analyzes texture using Laplacian operators
 - **Edge Density**: Measures terrain complexity through edge detection
 - **Texture Uniformity**: Evaluates surface consistency for landing safety
 
-### 🔍 Computer Vision Features
+###  Computer Vision Features
 
 - **SIFT Keypoint Detection**: Scale-invariant feature detection
 - **Edge Detection**: Canny edge detection for terrain boundaries
 - **Hough Line Detection**: Identifies linear structures in terrain
 - **Contour Analysis**: Detects and analyzes terrain contours
 
-### 🤖 AI Assistant (NEW!)
+###  AI Assistant (NEW!)
 
 - **Gemini AI Integration**: Powered by Google's Gemini Pro model
 - **Score Verification**: AI validates and explains safety assessments
@@ -26,21 +26,21 @@ A comprehensive Streamlit application for analyzing Mars terrain images to asses
 - **Intelligent Explanations**: Detailed reasoning for each metric
 - **Fallback Mode**: Works even without API key (basic explanations)
 
-### 📊 Interactive Dashboard
+###  Interactive Dashboard
 
 - **Real-time Safety Scoring**: 0-100 safety score with visual indicators
 - **Interactive Plotly Charts**: Gauges, bar charts, and 3D visualizations
 - **Risk Assessment**: Comprehensive risk factor analysis
 - **AI-Powered Recommendations**: Intelligent landing recommendations
 
-### 🎨 Modern UI
+###  Modern UI
 
 - **Responsive Design**: Works on desktop and mobile devices
 - **Custom CSS Styling**: Beautiful gradient themes and animations
 - **Tabbed Interface**: Organized analysis sections (5 tabs now!)
 - **Real-time Processing**: Instant feedback and results
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -93,10 +93,10 @@ A comprehensive Streamlit application for analyzing Mars terrain images to asses
 ### 2. Configure Analysis
 
 - Toggle analysis options in the sidebar:
-  - 🔍 Feature Analysis
-  - 📊 Safety Dashboard
-  - 📋 Detailed Metrics
-  - 🤖 AI-Powered Insights
+  -  Feature Analysis
+  -  Safety Dashboard
+  -  Detailed Metrics
+  -  AI-Powered Insights
 - Adjust safety thresholds as needed
 - Configure AI Assistant with API key (optional)
 
@@ -104,28 +104,28 @@ A comprehensive Streamlit application for analyzing Mars terrain images to asses
 
 Navigate through the 5 analysis tabs:
 
-#### 📊 Safety Analysis
+#### � Safety Analysis
 
 - View overall safety score (0-100)
 - See detailed metric breakdowns with AI explanations
 - Interactive safety dashboard with gauges and charts
 - AI verification of safety scores
 
-#### 🔍 Feature Detection
+####  Feature Detection
 
 - SIFT keypoint visualization
 - Edge detection results
 - Hough line detection
 - Contour analysis
 
-#### 📈 Visual Analysis
+####  Visual Analysis
 
 - 3D terrain topography
 - Gradient magnitude analysis
 - Pixel intensity histograms
 - Advanced visualizations
 
-#### 🤖 AI Insights
+####  AI Insights
 
 - Intelligent landing recommendations
 - Risk factor identification
@@ -139,7 +139,7 @@ Navigate through the 5 analysis tabs:
 - Quick question buttons for common queries
 - Contextual responses based on current analysis
 
-## 🤖 AI Assistant Features
+##  AI Assistant Features
 
 ### Gemini AI Integration
 
@@ -162,7 +162,7 @@ Navigate through the 5 analysis tabs:
 3. Create a new API key
 4. Add it to your `.env` file or enter it in the app interface
 
-## �🔧 Technical Details
+##  Technical Details
 
 ### Safety Metrics
 
@@ -217,7 +217,7 @@ overall_score = (slope_score × 0.3 +
 - AI interaction examples
 - STEM education tools
 
-## 📊 New AI Analysis Components
+##  New AI Analysis Components
 
 ### Score Verification
 
@@ -233,7 +233,7 @@ overall_score = (slope_score × 0.3 +
 - **Technical Details**: In-depth explanations of algorithms
 - **Practical Impact**: Real-world implications of measurements
 
-## 🛠️ Customization
+##  Customization
 
 ### Modifying Safety Thresholds
 
@@ -291,7 +291,7 @@ max_texture_variance = 500.0  # Maximum texture variance
 - Restart Streamlit if needed
 - AI responses may take 2-5 seconds
 
-## 📈 Performance Tips
+##  Performance Tips
 
 ### Optimization
 
@@ -309,7 +309,7 @@ max_texture_variance = 500.0  # Maximum texture variance
 - **Internet**: Required for AI features (optional for basic analysis)
 - **Browser**: Latest Chrome, Firefox, or Safari
 
-## 🚀 Future Enhancements
+##  Future Enhancements
 
 ### Planned Features
 
@@ -328,7 +328,7 @@ max_texture_variance = 500.0  # Maximum texture variance
 - **Uncertainty Quantification**: Confidence intervals
 - **Mission Planning**: Route optimization with AI
 
-## 📞 Support
+##  Support
 
 ### Getting Help
 
@@ -352,7 +352,7 @@ max_texture_variance = 500.0  # Maximum texture variance
 - Follow coding standards
 - Document AI integration patterns
 
-## � Privacy & Security
+##  Privacy & Security
 
 ### Data Handling
 
@@ -368,11 +368,11 @@ max_texture_variance = 500.0  # Maximum texture variance
 - Use environment variables in production
 - Review AI responses for accuracy
 
-## �📄 License
+##  License
 
 This project is open source and available under the MIT License.
 
-## 🎖️ Acknowledgments
+##  Acknowledgments
 
 - **NASA Mars Missions**: Inspiration and reference data
 - **Google AI**: Gemini Pro model for intelligent analysis
@@ -383,6 +383,6 @@ This project is open source and available under the MIT License.
 
 ---
 
-**🚀 Ready for AI-Enhanced Mars Landing Assessment!**
+** Ready for AI-Enhanced Mars Landing Assessment!**
 
 Upload your terrain image, configure the AI assistant, and let our advanced system guide your landing decisions with intelligent explanations and verification!
